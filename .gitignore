@@ -18,3 +18,5 @@
 secrets.json
 
 npm-debug.log*
+
+*.txt
