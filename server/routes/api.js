@@ -4,8 +4,6 @@ const api = require('express').Router({mergeParams: true});
 
 api.get('/:searchTerms', async (req,res) => {
     const result = await searchMany(req.params.searchTerms)
-    console.log(result);
-    
     res.json(result);
 });
 
