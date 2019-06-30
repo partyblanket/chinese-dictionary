@@ -4,7 +4,7 @@ const {saveMany} = require('./mongoose/actions/word')
 const app = require('./express');
 const db = require('./mongoose');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 const http = require('http').Server(app);
 
