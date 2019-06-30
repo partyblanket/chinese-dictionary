@@ -17,18 +17,19 @@ function saveMany(wordObjectArray){
     });
 }
 
-function searchMany ({searchObject, fields}){
+function searchMany (searchObject){
     return new Promise((resolve, reject) => {
-        Word.find(searchObject, fields, (err, docs) =>{
+        console.log(searchObject);
+        
+        Word.find({en: {$regex: searchObject, $options: 'i'}}).limit(20).exec((err, docs) => {
             if (err) reject(err);
             resolve(docs)
         })
-        console.log('inside');
     })
     // const searchObject = { name: /john/i }
     // const fields = "simp trad"
 
-
+    
     
 }
 
