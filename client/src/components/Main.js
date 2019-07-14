@@ -42,7 +42,7 @@ export default Main
 
 async function searchAll (searchInput) {
     if(searchInput.trim() === '') return
-    const {data} = await axios.get('/api/'+searchInput)
+    const {data} = await axios.get('/api/search/'+searchInput)
     if(Array.isArray(data)){
         return data
     }else{
