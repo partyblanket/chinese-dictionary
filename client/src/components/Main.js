@@ -5,6 +5,7 @@ import Search from './Search';
 import axios from 'axios'
 import PrivateRoute from './PrivateRoute';
 import User from './User';
+import LoginButton from './LoginForm';
 
 function Main() {
 
@@ -22,8 +23,7 @@ function Main() {
     },[searchInput])
 
     useEffect(()=>{
-        console.log(searchItems);
-        
+       
     },[searchItems])
 
     return (
@@ -31,7 +31,7 @@ function Main() {
         <>
           <Header searchInput={searchInput} setSearchInput={setSearchInput}/>
           <Search searchItems={searchItems}/>
-          {/* <Route exact path='/login' component={Login} /> */}
+          <Route exact path='/login' component={LoginButton} />
           <PrivateRoute exact path='/user' component={User} loggedIn={false}/>
           
   
