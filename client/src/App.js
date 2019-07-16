@@ -1,11 +1,24 @@
 import React from 'react';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxPromise from 'redux-promise';
+import reducer from './utils/reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import Main from './components/Main';
+
+const store = createStore(reducer, composeWithDevTools(
+  applyMiddleware(
+      reduxPromise
+  )
+));
 
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
       <Main />
-    </div>
+    </Provider>
   );
 }
 

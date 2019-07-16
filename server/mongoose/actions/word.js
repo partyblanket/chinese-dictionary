@@ -19,8 +19,6 @@ function saveMany(wordObjectArray){
 
 function searchMany (searchObject){
     return new Promise((resolve, reject) => {
-        console.log(searchObject);
-        
         Word.find({en: {$regex: searchObject, $options: 'i'}}).limit(20).exec((err, docs) => {
             if (err) reject(err);
             resolve(docs)

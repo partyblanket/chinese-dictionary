@@ -3,9 +3,13 @@ const { registerUser} = require('../mongoose/actions/user')
 
 const api = require('express').Router({mergeParams: true});
 
-api.get('/search/:searchTerms', async (req,res) => {
-    const result = await searchMany(req.params.searchTerms)
-    res.json(result);
+api.get('/search/:searchTerms', async (req, res) => {
+    try{
+        const result = await searchMany(req.params.searchTerms)
+        res.json(result);
+    }catch(err){
+        console.log(err);  
+    }
 });
 
 api.get('/', (req,res) => {

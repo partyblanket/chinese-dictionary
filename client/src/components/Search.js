@@ -1,12 +1,19 @@
 import React from 'react'
 import Box from './Box';
+import { connect } from 'react-redux';
 
-function Search({searchItems}) {   
+function Search({searchAllResults}) {   
     return (
         <div className='search'>
-            {searchItems && searchItems.map(item => (<Box key={item._id} details={item}/>))}
+            {searchAllResults.map(item => (<Box key={item._id} details={item}/>))}
         </div>
     )
 }
 
-export default Search
+function mapStateToProps(state) {
+    return {
+        searchAllResults: state.searchAllResults || [],
+    };
+  };
+  
+  export default connect(mapStateToProps)(Search);
