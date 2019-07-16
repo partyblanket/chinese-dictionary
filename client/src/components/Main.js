@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from './Header';
 import Search from './Search';
 import axios from 'axios'
+import PrivateRoute from './PrivateRoute';
+import User from './User';
 
 function Main() {
 
@@ -30,7 +32,7 @@ function Main() {
           <Header searchInput={searchInput} setSearchInput={setSearchInput}/>
           <Search searchItems={searchItems}/>
           {/* <Route exact path='/login' component={Login} /> */}
-          {/* <PrivateRoute exact path='/' component={List} /> */}
+          <PrivateRoute exact path='/user' component={User} loggedIn={false}/>
           
   
         </>
