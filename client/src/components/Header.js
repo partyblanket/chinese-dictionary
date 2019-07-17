@@ -20,6 +20,7 @@ function Header({dispatch}) {
 
     return (
         <header>
+            <ion-icon name='ios-heart' size='large'/>
             <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>
         </header>
     )
