@@ -1,5 +1,7 @@
 const { searchMany } = require('../mongoose/actions/word')
-const { registerUser} = require('../mongoose/actions/user')
+const { registerUser, getUser} = require('../mongoose/actions/user')
+const { sign } = require('../jwt');
+const { hashPassword, checkPassword } = require('../bcrypt');
 
 const api = require('express').Router({mergeParams: true});
 
@@ -8,7 +10,7 @@ api.get('/search/:searchTerms', async (req, res) => {
         const result = await searchMany(req.params.searchTerms)
         res.json(result);
     }catch(err){
-        console.log(err);  
+        console.log(err);
     }
 });
 
@@ -17,20 +19,34 @@ api.get('/', (req,res) => {
 });
 
 api.post('/register', async (req, res) => {
-    console.log(req.body);
-    
-    const newUserObject = {
-        email: req.body.email,
-        password: req.body.password
-    };
-    
+    const {email, password} = req.body
     try{
-        const result = await registerUser(newUserObject)
+        const hashedPassword = await hashPassword(password)
+        const result = await registerUser(email, hashedPassword)
+        const token = await sign({email})
         console.log(result);
-        res.json({ok: true})
+        res.json({token, email})
     }catch(err){
         console.log(err)
-        res.json({ok: false})
+        res.json(err)
+    }
+
+})
+
+api.post('/login', async (req, res) => {
+    const {email, password} = req.body
+    try{
+        const user = await getUser(email)
+        const passwordMatch = await checkPassword(password, user.password)
+        const token = await sign({email})
+        if(passwordMatch) {
+            res.json({token, email})
+        }else {
+            res.json({error: 'password does not match'})
+        }
+    }catch(err){
+        console.log(err)
+        res.json(err)
     }
 
 })

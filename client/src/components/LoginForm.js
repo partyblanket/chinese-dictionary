@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux'
+import { register, login } from '../utils/actions';
+
 
 function LoginForm(props) {
 
@@ -29,10 +32,10 @@ function LoginForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(e.target.id === 'login-form'){
-      console.log('submit login');
+      props.dispatch(login(loginDets));
       
     }else if(e.target.id === 'register-form'){
-      console.log('submit register');
+      props.dispatch(register(registerDets));
     } 
     
   }
@@ -74,4 +77,9 @@ function LoginForm(props) {
   )
 }
 
-export default LoginForm
+function mapStateToProps(state) {
+  return {
+  };
+};
+
+export default connect(mapStateToProps)(LoginForm)

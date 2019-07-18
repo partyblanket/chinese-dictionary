@@ -5,8 +5,11 @@ import Search from './Search';
 import PrivateRoute from './PrivateRoute';
 import User from './User';
 import LoginButton from './LoginForm';
+import { connect } from 'react-redux';
+import { checkJWT } from '../utils/actions'
 
 function Main(props) {
+    props.dispatch(checkJWT())
     return (
       <BrowserRouter>
         <>
@@ -23,4 +26,9 @@ function Main(props) {
 
 
 
-export default Main
+function mapStateToProps(state) {
+  return {
+  };
+};
+
+export default connect(mapStateToProps)(Main)

@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../secrets')
 
-const sign = (username) => {
-    const token = jwt.sign({username: username},
+const sign = (objectToInclude) => {
+    const token = jwt.sign(objectToInclude,
         JWT_SECRET,
         { expiresIn: '24h' }
       );
@@ -10,5 +10,3 @@ const sign = (username) => {
 }
 
 module.exports = { sign }
-
-jwt.verify(sign('hi'),JWT_SECRET,(err, doc) => {console.log(doc)})
