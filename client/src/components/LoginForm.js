@@ -17,7 +17,7 @@ function LoginForm(props) {
     from: { pathname: "/" },
   }; 
 
-  if (props.username) {
+  if (props.email) {
     return <Redirect to={from} />;
   };
 
@@ -79,6 +79,7 @@ function LoginForm(props) {
 
 function mapStateToProps(state) {
   return {
+    email: state.email,
   };
 };
 

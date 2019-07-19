@@ -61,3 +61,10 @@ export async function checkJWT () {
         }
     }    
 }
+
+export function showHideUserDropdown (newStatus) {
+    return {
+        type: 'USER_DROPDOWN_STATUS_CHANGE',
+        status: newStatus
+    }
+}

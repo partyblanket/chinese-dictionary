@@ -1,5 +1,5 @@
 
-export default function(state = {}, action) {
+export default function(state = {userDropdownStatus: 'hide'}, action) {
     if(action.type === 'SEARCH_ALL_RESULTS'){
         state = {
             ...state,
@@ -20,7 +20,15 @@ export default function(state = {}, action) {
         }
     }
   
-
+    if(action.type === 'USER_DROPDOWN_STATUS_CHANGE') {
+        const newStatus = action.status 
+            ? action.status
+            : state.userDropdownStatus === 'hide' ? '' : 'hide'
+        state = {
+            ...state,
+            userDropdownStatus: newStatus
+        }
+    }
     return state;
 }
 
