@@ -56,7 +56,6 @@ header > .head.notlogged{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  z-index: -2;
 }
 
 .dropdown {

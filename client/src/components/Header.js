@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-
+import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { searchAll, showHideUserDropdown } from '../utils/actions';
 import UserDropDown from './UserDropDown';
@@ -28,7 +28,9 @@ function Header({dispatch, email}) {
                         onClick={() => dispatch(showHideUserDropdown())} 
                         className='head logged'
                     > {email[0]} </p> 
-                    : <p className='head notlogged'>Log in</p>
+                    : <Link
+                        to="/login"
+                        className='head notlogged'>Log in</Link>
                 }
                 
             </header>

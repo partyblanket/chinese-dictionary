@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const WordSchema = require('../models/word').Schema
 
 let UserSchema = new mongoose.Schema({
     email: {
@@ -10,6 +11,13 @@ let UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    words: {
+        type: [WordSchema],
+    }
 });
+
+
+
+
 
 module.exports = mongoose.model('User', UserSchema);

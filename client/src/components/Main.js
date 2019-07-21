@@ -4,7 +4,7 @@ import Header from './Header';
 import Search from './Search';
 import PrivateRoute from './PrivateRoute';
 import User from './User';
-import LoginButton from './LoginForm';
+import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 import { checkJWT } from '../utils/actions'
 
@@ -15,7 +15,7 @@ function Main(props) {
         <>
           <Header />
           <Search />
-          <Route exact path='/login' component={LoginButton} />
+          <Route exact path='/login' component={LoginForm} />
           <PrivateRoute exact path='/user' component={User} loggedIn={false}/>
           
   

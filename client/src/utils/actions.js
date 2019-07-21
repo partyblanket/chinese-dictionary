@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+axios.defaults.headers.post['x-access-token'] = localStorage.getItem('jwtoken')
+
 export async function searchAll (searchInput) {
     const {data} = await axios.get('/api/search/'+searchInput)
     if(Array.isArray(data)){
@@ -26,6 +28,7 @@ export async function register (userDetsObject) {
         }
     }else{
         localStorage.setItem('jwtoken', data.token)
+        axios.defaults.headers.post['x-access-token'] = localStorage.getItem('jwtoken')
         return {
             type: 'REGISTERED_USER',
             email: data.email
@@ -43,6 +46,7 @@ export async function login (userDetsObject) {
         }
     }else{
         localStorage.setItem('jwtoken', data.token)
+        axios.defaults.headers.post['x-access-token'] = localStorage.getItem('jwtoken')
         return {
             type: 'LOGIN_USER',
             email: data.email
@@ -62,9 +66,16 @@ export async function checkJWT () {
     }    
 }
 
+export async function changeCollection (action, payload) {
+    const {data} = await axios.post('/api/update',{action, payload})
+    console.log(data);
+    
+}
+
 export function showHideUserDropdown (newStatus) {
     return {
         type: 'USER_DROPDOWN_STATUS_CHANGE',
         status: newStatus
     }
 }
+
