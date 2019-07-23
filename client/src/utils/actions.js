@@ -55,6 +55,14 @@ export async function login (userDetsObject) {
 
 }
 
+export function logout () {
+        localStorage.removeItem('jwtoken')
+        return {
+            type: 'LOGOUT_USER',
+        }
+
+}
+
 export async function checkJWT () {
     const token = localStorage.getItem('jwtoken');
     if(token){

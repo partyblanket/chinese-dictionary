@@ -19,6 +19,14 @@ export default function(state = {userDropdownStatus: 'hide'}, action) {
             email: action.email
         }
     }
+
+    if(action.type === 'LOGOUT_USER'){
+        state = {
+            ...state,
+            email: null,
+            userDropdownStatus: 'hide'
+        }
+    }
   
     if(action.type === 'USER_DROPDOWN_STATUS_CHANGE') {
         const newStatus = action.status 

@@ -5,7 +5,6 @@ function registerUser (email, password) {
         const user = new User({email, password});
         user.save((err, user) => {
             console.log(err);
-            
             if(err) return reject({error: 'user already exists'})
             resolve(user)
         })
