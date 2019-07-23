@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 import { searchAll, showHideUserDropdown } from '../utils/actions';
 import UserDropDown from './UserDropDown';
 
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar'
+
+import FormControl from 'react-bootstrap/FormControl'
+import Form from 'react-bootstrap/Form'
+
+
 
 function Header({dispatch, email}) {
 
@@ -20,21 +27,26 @@ function Header({dispatch, email}) {
 
     return (
         <>
-            <header>
-                <ion-icon name='ios-heart' size='large'/>
-                <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>
+            <Navbar bg='light' sticky='top' justify-content-between>
+                <Navbar.Brand href="#home">A Dictionary</Navbar.Brand>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" />
+                </Form>
+                {/* <input type='text' value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/> */}
                 { email 
-                    ? <p 
-                        onClick={() => dispatch(showHideUserDropdown())} 
-                        className='head logged'
-                    > {email[0]} </p> 
-                    : <Link
-                        to="/login"
-                        className='head notlogged'>Log in</Link>
+                    ? <UserDropDown />
+                     
+                    : <Button variant='danger'>
+                            <Link
+                                to="/login"
+                                className='head notlogged'>Log in
+                            </Link>
+                        </Button>
                 }
-                
-            </header>
-            <UserDropDown />
+            </Navbar>
+            
+            
+            
         </>
     )
 }
