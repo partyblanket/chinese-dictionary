@@ -4,7 +4,7 @@ import Header from './Header';
 import Search from './Search';
 import PrivateRoute from './PrivateRoute';
 import User from './User';
-import LoginForm from './LoginForm';
+import LoginForm from './LoginModal';
 import { connect } from 'react-redux';
 import { checkJWT } from '../utils/actions'
 

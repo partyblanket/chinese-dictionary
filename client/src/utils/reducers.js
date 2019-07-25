@@ -1,5 +1,5 @@
 
-export default function(state = {userDropdownStatus: 'hide'}, action) {
+export default function(state = {userDropdownStatus: 'hide', showLoginModal: false, userCollection: []}, action) {
     if(action.type === 'SEARCH_ALL_RESULTS'){
         state = {
             ...state,
@@ -27,6 +27,13 @@ export default function(state = {userDropdownStatus: 'hide'}, action) {
             userDropdownStatus: 'hide'
         }
     }
+
+    if(action.type === 'LOGIN_MODAL_STATE'){
+        state = {
+            ...state,
+            showLoginModal: action.newState
+        }
+    }
   
     if(action.type === 'USER_DROPDOWN_STATUS_CHANGE') {
         const newStatus = action.status 
@@ -36,6 +43,13 @@ export default function(state = {userDropdownStatus: 'hide'}, action) {
             ...state,
             userDropdownStatus: newStatus
         }
+    }
+
+    if(action.type === 'ADDED_ITEM_TO_COLLECTION') {
+        state = {
+            ...state,
+        }
+        state.userCollection.push(action.payload)
     }
     return state;
 }

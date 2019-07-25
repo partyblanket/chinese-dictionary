@@ -34,7 +34,6 @@ export async function register (userDetsObject) {
             email: data.email
         }
     }
-
 }
 
 export async function login (userDetsObject) {
@@ -63,6 +62,14 @@ export function logout () {
 
 }
 
+export function setLoginModalState (newState) {
+    return {
+        type: 'LOGIN_MODAL_STATE',
+        newState
+    }
+
+}
+
 export async function checkJWT () {
     const token = localStorage.getItem('jwtoken');
     if(token){
@@ -77,7 +84,10 @@ export async function checkJWT () {
 export async function changeCollection (action, payload) {
     const {data} = await axios.post('/api/update',{action, payload})
     console.log(data);
-    
+    return {
+        type: 'ADDED_ITEM_TO_COLLECTION',
+        payload
+    }
 }
 
 export function showHideUserDropdown (newStatus) {
