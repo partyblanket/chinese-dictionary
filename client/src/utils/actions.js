@@ -70,6 +70,13 @@ export function setLoginModalState (newState) {
 
 }
 
+export function setAddCollectionModalState (newState) {
+    return {
+        type: 'COLLECTION_MODAL_STATE',
+        newState
+    }
+}
+
 export async function checkJWT () {
     const token = localStorage.getItem('jwtoken');
     if(token){
@@ -82,6 +89,8 @@ export async function checkJWT () {
 }
 
 export async function changeCollection (action, payload) {
+    console.log(action, payload);
+    
     const {data} = await axios.post('/api/update',{action, payload})
     console.log(data);
     return {
@@ -96,4 +105,5 @@ export function showHideUserDropdown (newStatus) {
         status: newStatus
     }
 }
+
 

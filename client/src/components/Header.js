@@ -9,7 +9,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
 
-import LoginForm from './LoginModal';
+import LoginModal from './LoginModal';
+import CreateNewCollectionModal from './CreateNewCollectionModal';
 
 
 
@@ -41,7 +42,8 @@ function Header({dispatch, email}) {
                         </Button>
                 }
             </Navbar>
-            <LoginForm />
+            <LoginModal />
+            <CreateNewCollectionModal />
         </>
     )
 }

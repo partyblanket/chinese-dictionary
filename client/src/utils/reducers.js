@@ -2,6 +2,7 @@
 const default_state = {
     userDropdownStatus: 'hide', 
     showLoginModal: false, 
+    showAddCollectionModal: true,
     userCollection: [],
     userCollections: ['1','2','3']
 }
@@ -39,6 +40,13 @@ export default function(state = {...default_state}, action) {
         state = {
             ...state,
             showLoginModal: action.newState
+        }
+    }
+
+    if(action.type === 'COLLECTION_MODAL_STATE') {
+        state = {
+            ...state,
+            showAddCollectionModal: action.newState
         }
     }
   

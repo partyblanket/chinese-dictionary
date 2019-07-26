@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-// const save = email ? <Button style={{position: 'absolute', right: '1rem', cursor: 'pointer'}} onClick={() => dispatch(changeCollection('add',details))} className='save'>SAVE</Button> : null;
-
-
 function DropdownCollectionSaveButton({userCollections}) {
     return (
         <DropdownButton
