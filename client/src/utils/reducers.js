@@ -1,5 +1,12 @@
 
-export default function(state = {userDropdownStatus: 'hide', showLoginModal: false, userCollection: []}, action) {
+const default_state = {
+    userDropdownStatus: 'hide', 
+    showLoginModal: false, 
+    userCollection: [],
+    userCollections: ['1','2','3']
+}
+
+export default function(state = {...default_state}, action) {
     if(action.type === 'SEARCH_ALL_RESULTS'){
         state = {
             ...state,
