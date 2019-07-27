@@ -13,6 +13,9 @@ let UserSchema = new mongoose.Schema({
     },
     words: {
         type: [WordSchema],
+    },
+    collections: {
+        type: []
     }
 });
 

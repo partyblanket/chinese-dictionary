@@ -1,5 +1,5 @@
 const { searchMany } = require('../mongoose/actions/word')
-const { registerUser, getUser, changeCollection } = require('../mongoose/actions/user')
+const { registerUser, findUser, addRemoveCollection, addRemoveWordsUser, getData } = require('../mongoose/actions/user')
 const { sign } = require('../jwt');
 const { hashPassword, checkPassword } = require('../bcrypt');
 const { checkToken } = require('../middleware')
@@ -33,14 +33,26 @@ api.post('/register', async (req, res) => {
 api.post('/login', async (req, res) => {
     const {email, password} = req.body
     try{
-        const user = await getUser(email)
+        const user = await findUser(email)
         const passwordMatch = await checkPassword(password, user.password)
         const token = await sign({email, id: user._id})
         if(passwordMatch) {
-            res.json({token, email})
+            res.json({token, email: user.email, collections: user.collections, words: user.words})
         }else {
             res.json({error: 'password does not match'})
         }
+    }catch(err){
+        console.log(err)
+        res.json(err)
+    }
+
+})
+
+api.get('/data', checkToken, async (req, res) => {
+    const userid = req.userid
+    try{
+        const {email, collections, words} = await getData(userid)
+        res.json({email, collections, words})
     }catch(err){
         console.log(err)
         res.json(err)
@@ -54,7 +66,15 @@ api.post('/update', checkToken, async (req, res) => {
     console.log(userid, action, payload);
     
     try{
-        await changeCollection(userid, action, payload)
+        if(action === 'add_collection'){
+            await addRemoveCollection(userid, action, payload)
+        }else if(action === 'save_word'){
+            await addRemoveWordsUser(userid, action, payload)
+        }else{
+            console.log('action not recognised: ',action);
+            return res.json({err: 'wrong action paramater'})
+        }
+        
         res.json({ok: 'yes'})
     }catch(err){
         console.log(err)

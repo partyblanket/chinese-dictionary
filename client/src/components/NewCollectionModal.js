@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
 
-function CreateNewCollectionModal({dispatch, showAddCollectionModal}) {
+function NewCollectionModal({dispatch, showAddCollectionModal}) {
     const [collectionTitle, setCollectionTitle] = useState('')
 
     const handleSubmit = (e) => {
@@ -44,4 +44,4 @@ function mapStateToProps(state) {
     };
 };
 
-export default connect(mapStateToProps)(CreateNewCollectionModal)
+export default connect(mapStateToProps)(NewCollectionModal)

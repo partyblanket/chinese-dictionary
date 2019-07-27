@@ -1,71 +1,91 @@
-
 const default_state = {
-    userDropdownStatus: 'hide', 
-    showLoginModal: false, 
-    showAddCollectionModal: true,
-    userCollection: [],
-    userCollections: ['1','2','3']
+  userDropdownStatus: "hide",
+  showLoginModal: false,
+  showAddCollectionModal: false,
+  words: [],
+  userCollections: []
+};
+
+export default function(state = { ...default_state }, action) {
+  if (action.type === "SEARCH_ALL_RESULTS") {
+    state = {
+      ...state,
+      searchAllResults: action.data
+    };
+  }
+  if (action.type === "ERROR") {
+    state = {
+      ...state,
+      error: action.error
+    };
+  }
+
+  if (action.type === "LOGIN_USER") {
+    state = {
+      ...state,
+      email: action.email,
+      userCollections: action.collections,
+      words: action.words
+    };
+  }
+
+  if (action.type === "LOGOUT_USER") {
+    state = {
+      ...state,
+      email: null,
+      userCollections: [],
+      words: []
+    };
+  }
+
+  if (action.type === "LOGIN_MODAL_STATE") {
+    state = {
+      ...state,
+      showLoginModal: action.newState
+    };
+  }
+
+  if (action.type === "NEW_COLLECTION_MODAL_STATE") {
+    state = {
+      ...state,
+      showAddCollectionModal: action.newState
+    };
+  }
+
+  if (action.type === "USER_DROPDOWN_STATUS_CHANGE") {
+    const newStatus = action.status
+      ? action.status
+      : state.userDropdownStatus === "hide"
+      ? ""
+      : "hide";
+    state = {
+      ...state,
+      userDropdownStatus: newStatus
+    };
+  }
+
+  if (action.type === "ADDED_ITEM_TO_COLLECTION") {
+    state = {
+      ...state,
+      words: [...state.words, action.payload]
+    };
+  }
+
+  if (action.type === "NEW_COLLECTION") {
+    state = {
+      ...state,
+      userCollections: [...state.userCollections, action.payload]
+    };
+  }
+
+  if (action.type === "USER_DATA") {
+    state = {
+      ...state,
+      email: action.email,
+      words: action.words,
+      userCollections: action.collections
+    };
+  }
+
+  return state;
 }
-
-export default function(state = {...default_state}, action) {
-    if(action.type === 'SEARCH_ALL_RESULTS'){
-        state = {
-            ...state,
-            searchAllResults: action.data
-        }
-    }
-    if(action.type === 'ERROR'){
-        state = {
-            ...state,
-            error: action.error
-        }
-    }
-  
-    if(action.type === 'REGISTERED_USER' || action.type === 'LOGIN_USER'){
-        state = {
-            ...state,
-            email: action.email
-        }
-    }
-
-    if(action.type === 'LOGOUT_USER'){
-        state = {
-            ...state,
-            email: null,
-            userDropdownStatus: 'hide'
-        }
-    }
-
-    if(action.type === 'LOGIN_MODAL_STATE'){
-        state = {
-            ...state,
-            showLoginModal: action.newState
-        }
-    }
-
-    if(action.type === 'COLLECTION_MODAL_STATE') {
-        state = {
-            ...state,
-            showAddCollectionModal: action.newState
-        }
-    }
-  
-    if(action.type === 'USER_DROPDOWN_STATUS_CHANGE') {
-        const newStatus = action.status 
-            ? action.status
-            : state.userDropdownStatus === 'hide' ? '' : 'hide'
-        state = {
-            ...state,
-            userDropdownStatus: newStatus
-        }
-    }
-
-    if(action.type === 'ADDED_ITEM_TO_COLLECTION') {
-        state = {
-            ...state,
-        }
-        state.userCollection.push(action.payload)
-    }
-    return state;
-}
-

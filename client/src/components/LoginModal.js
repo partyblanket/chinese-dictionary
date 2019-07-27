@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { register, login, setLoginModalState } from '../utils/actions';
+import { loginRegister, setLoginModalState } from '../utils/actions';
 
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -28,13 +28,11 @@ function LoginModal({dispatch, showLoginModal}) {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(e.target.id === 'login-form'){
-      dispatch(login(loginDets));
-      
+      dispatch(loginRegister(loginDets));
     }else if(e.target.id === 'register-form'){
-      dispatch(register(registerDets));
+      dispatch(loginRegister(registerDets, true));
     }
     dispatch(setLoginModalState(false))
-    
   }
 
 
@@ -69,13 +67,10 @@ function LoginModal({dispatch, showLoginModal}) {
         <FormControl type='text' name='email' placeholder='email' value={registerDets.email} onChange={handleChange} />
         <FormControl type='password' name='password' placeholder='password' value={registerDets.password} onChange={handleChange} />
       </Form>
-
-      
     </Modal.Body>
-
     <Modal.Footer>
       <Button size='sm' onClick={() => setRegistering(false)}>Already registered? Click here to Login</Button>
-      <Button type='submit' form='register-form' variant="primary">Login</Button>
+      <Button type='submit' form='register-form' variant="primary">Register</Button>
     </Modal.Footer>
   </>
   )

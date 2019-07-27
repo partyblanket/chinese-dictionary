@@ -12,7 +12,7 @@ function registerUser (email, password) {
 
 }
 
-function getUser (email) {
+function findUser (email) {
     return new Promise((resolve, reject) => {
         User.findOne({email}, (err, user) => {
             if(err) {
@@ -25,15 +25,21 @@ function getUser (email) {
             }
         })
     })
-
 }
 
-function changeCollection (userid, action, content) {
+function getData (userid) {
+    return new Promise((resolve, reject) => {
+        User.findById(userid, (err, user) => {
+            if(err) return reject({error: 'cannot find user'})
+            resolve(user)
+        })
+    })
+}
+
+function addRemoveWordsUser (userid, action, content) {
     return new Promise((resolve, reject) => {
         User.findById(userid, (err, user) => {
             if(err) return reject({error: 'cant find user'})
-            console.log('UU',user);
-            
             user.words.push(content)
             user.save((err) => {
                 if(err) return reject({error: 'error adding document to array'})
@@ -44,6 +50,20 @@ function changeCollection (userid, action, content) {
     })
 }
 
+function addRemoveCollection (userid, action, content) {
+    return new Promise((resolve, reject) => {
+        User.findById(userid, (err, user) => {
+            if(err) return reject({error: 'cant find user'})
+            user.collections.push(content)
+            user.save((err) => {
+                if(err) return reject({error: 'error adding collection to array'})
+                resolve()   
+            })
+            
+        })
+    })
+}
 
 
-module.exports = { registerUser, getUser, changeCollection }
+
+module.exports = { registerUser, findUser, addRemoveWordsUser, getData, addRemoveCollection }
