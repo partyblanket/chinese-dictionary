@@ -87,5 +87,12 @@ export default function(state = { ...default_state }, action) {
     };
   }
 
+  if (action.type === "JWT_LOGIN") {
+    state = {
+      ...state,
+      email: action.email
+    };
+  }
+
   return state;
 }

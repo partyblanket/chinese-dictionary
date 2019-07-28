@@ -16,7 +16,7 @@ function DropdownCollectionSaveButton({ dispatch, userCollections, details }) {
           key={collection}
           eventKey={index}
           onClick={() =>
-            dispatch(changeCollection("save_word", { ...details, collection }))
+            dispatch(changeCollection("save_word", { ...details, collections: [collection] }))
           }
         >
           {collection}
@@ -35,7 +35,7 @@ function DropdownCollectionSaveButton({ dispatch, userCollections, details }) {
 
 function mapStateToProps(state) {
   return {
-    userCollections: state.userCollections 
+    userCollections: state.userCollections
   };
 }
 

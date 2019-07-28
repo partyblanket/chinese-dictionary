@@ -9,8 +9,8 @@ function UserDropDown({userDropdownStatus, dispatch, email}) {
     return (
         <NavDropdown title={email[0]}>
             <NavDropdown.Item>Settings</NavDropdown.Item>
+            <NavDropdown.Item>Collections</NavDropdown.Item>
             <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
-            <NavDropdown.Item>Other</NavDropdown.Item>
         </NavDropdown>
 
 //         <ul className={'dropdown user ' + userDropdownStatus}>
